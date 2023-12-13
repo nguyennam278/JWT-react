@@ -1,0 +1,36 @@
+.login-conatiner {
+  min-height: 100vh;
+  background-color: #f0f2f5;
+  padding-top: 15px;
+  .content-right {
+    border: 1px solid grey;
+    padding: 15px;
+    border-radius: 10px;
+    background: #fff;
+
+    .forgot-password {
+      text-decoration: none;
+      text-align: center;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+    .title-hide {
+      text-align: center;
+      color: #1877f2;
+      font-size: 20px;
+      font-weight: 500;
+    }
+  }
+  .content-left {
+    margin-top: 50px;
+    .content-left__title {
+      font-weight: 500;
+      color: #1877f2;
+      font-size: 50px;
+    }
+    .content-left__detail {
+      font-size: 30px;
+    }
+  }
+}
