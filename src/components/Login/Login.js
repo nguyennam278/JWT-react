@@ -1,6 +1,13 @@
 import React from "react";
 import "./Login.scss";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+
 const Login = (props) => {
+  const history = useHistory();
+  const changeRegister = () => {
+    history.push("/register");
+  };
+
   return (
     <div className="login-conatiner">
       <div className="container">
@@ -29,7 +36,9 @@ const Login = (props) => {
             </a>
             <hr />
             <div className="text-center">
-              <button className="btn btn-success">Create New Account</button>
+              <button className="btn btn-success" onClick={changeRegister}>
+                Create New Account
+              </button>
             </div>
           </div>
         </div>
