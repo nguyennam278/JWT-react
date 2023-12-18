@@ -24,7 +24,19 @@ const Login = (props) => {
       return;
     }
 
-    await loginUser(valueLogin, password);
+    let response = await loginUser(valueLogin, password);
+    console.log(response.data);
+    if (+response.data.EC === 0) {
+      let data = {
+        isAuth: true,
+        token: "faketoken",
+      };
+      sessionStorage.setItem("account", JSON.stringify(data));
+
+      history.push("/users");
+    } else {
+      toast.error(response.data.EM);
+    }
   };
 
   useEffect(() => {
