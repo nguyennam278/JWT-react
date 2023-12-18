@@ -1,17 +1,8 @@
-import React, { useEffect } from "react";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import React from "react";
 const Users = () => {
-  let history = useHistory();
-
-  useEffect(() => {
-    let session = sessionStorage.getItem("account");
-    if (!session) {
-      history.push("/login");
-    }
-  }, []);
-
   return (
     <div>
+      <h2>Users</h2>
       <h1>Hello</h1>
     </div>
   );

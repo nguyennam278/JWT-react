@@ -14,6 +14,13 @@ const Login = (props) => {
     history.push("/register");
   };
 
+  useEffect(() => {
+    let session = sessionStorage.getItem("account");
+    if (session) {
+      history.push("/");
+    }
+  }, []);
+
   const handleLogin = async () => {
     if (!valueLogin) {
       toast.error("Please enter email or phone number");
@@ -34,6 +41,7 @@ const Login = (props) => {
       sessionStorage.setItem("account", JSON.stringify(data));
 
       history.push("/users");
+      window.location.reload();
     } else {
       toast.error(response.data.EM);
     }
@@ -45,6 +53,12 @@ const Login = (props) => {
       .then((res) => console.log(res))
       .catch((error) => console.log(error));
   }, []);
+
+  const handlePressEnter = (event) => {
+    if (event.key === "Enter") {
+      handleLogin();
+    }
+  };
   return (
     <div className="login-conatiner">
       <div className="container">
@@ -69,6 +83,7 @@ const Login = (props) => {
               placeholder="Password"
               value={password}
               onChange={(event) => setPassword(event.target.value)}
+              onKeyPress={(event) => handlePressEnter(event)}
             />
             <button className="btn btn-primary" onClick={handleLogin}>
               Login
