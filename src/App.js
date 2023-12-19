@@ -6,7 +6,6 @@ import "react-toastify/dist/ReactToastify.css";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 import { useEffect, useState } from "react";
-import _ from "lodash";
 import AppRoute from "./routes/AppRoute";
 function App() {
   const [account, setAccount] = useState({});
