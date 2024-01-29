@@ -47,13 +47,6 @@ const Login = (props) => {
     }
   };
 
-  useEffect(() => {
-    axios
-      .get("http://localhost:8000/api/v1/testapi")
-      .then((res) => console.log(res))
-      .catch((error) => console.log(error));
-  }, []);
-
   const handlePressEnter = (event) => {
     if (event.key === "Enter") {
       handleLogin();
@@ -76,6 +69,7 @@ const Login = (props) => {
               placeholder="Email address or phone number"
               value={valueLogin}
               onChange={(event) => setValueLogin(event.target.value)}
+              onKeyPress={(event) => handlePressEnter(event)}
             />
             <input
               type="password"

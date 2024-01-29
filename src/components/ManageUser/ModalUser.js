@@ -4,19 +4,25 @@ import Modal from "react-bootstrap/Modal";
 import "./Users.scss";
 import { fetchGroup } from "../../services/userService";
 import { toast } from "react-toastify";
+import _ from "lodash";
 const ModalUser = (props) => {
   const [userGroup, setUserGroup] = useState([]);
 
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [address, setAddress] = useState("");
-  const [group, setGroup] = useState("");
+  const defaultData = {
+    email: "",
+    phone: "",
+    username: "",
+    password: "",
+    address: "",
+    sex: "",
+    group: "",
+  };
 
+  const [userData, setUserData] = useState(defaultData);
   useEffect(() => {
     getGroup();
-  });
+  }, []);
+
   const getGroup = async () => {
     let res = await fetchGroup();
     if (res && res.data.EC === 0) {
@@ -24,6 +30,16 @@ const ModalUser = (props) => {
     } else {
       toast.error(res.data.EM);
     }
+  };
+
+  const handleOnChangeInput = (value, name) => {
+    let _userData = _.cloneDeep(userData);
+    _userData[name] = value;
+    setUserData(_userData);
+  };
+
+  const check = () => {
+    console.log("Check:", userData);
   };
   return (
     <>
@@ -41,27 +57,62 @@ const ModalUser = (props) => {
             <div className="row">
               <div className="col-12 col-sm-6 form-group">
                 <label>Email: </label>
-                <input type="email" className="form-control" />
+                <input
+                  type="email"
+                  className="form-control"
+                  value={userData.email}
+                  onChange={(event) =>
+                    handleOnChangeInput(event.target.value, "email")
+                  }
+                />
               </div>
 
               <div className="col-12 col-sm-6 form-group">
                 <label>Phone number: </label>
-                <input type="text" className="form-control" />
+                <input
+                  type="text"
+                  className="form-control"
+                  value={userData.phone}
+                  onChange={(event) =>
+                    handleOnChangeInput(event.target.value, "phone")
+                  }
+                />
               </div>
 
               <div className="col-12 col-sm-6 form-group">
                 <label>Username: </label>
-                <input type="text" className="form-control" />
+                <input
+                  type="text"
+                  className="form-control"
+                  value={userData.username}
+                  onChange={(event) =>
+                    handleOnChangeInput(event.target.value, "username")
+                  }
+                />
               </div>
 
               <div className="col-12 col-sm-6 form-group">
                 <label>Password: </label>
-                <input type="password" className="form-control" />
+                <input
+                  type="password"
+                  className="form-control"
+                  value={userData.password}
+                  onChange={(event) =>
+                    handleOnChangeInput(event.target.value, "password")
+                  }
+                />
               </div>
 
               <div className="col-12 col-sm-12 form-group">
                 <label>Address: </label>
-                <input type="text" className="form-control" />
+                <input
+                  type="text"
+                  className="form-control"
+                  value={userData.address}
+                  onChange={(event) =>
+                    handleOnChangeInput(event.target.value, "address")
+                  }
+                />
               </div>
 
               <div className="col-12 col-sm-6 form-group">
@@ -95,8 +146,8 @@ const ModalUser = (props) => {
           <Button variant="secondary" onClick={props.handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={props.confirmDeleteUser}>
-            Confirm
+          <Button variant="primary" onClick={() => check()}>
+            Create
           </Button>
         </Modal.Footer>
       </Modal>
